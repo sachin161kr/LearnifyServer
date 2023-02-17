@@ -50,7 +50,6 @@ app.post("/api/register", async (req, res) => {
   //res.send("Got it");
   const user = await accounts.findOne({
     email: req.body.email,
-    password: req.body.password,
   });
 
   if (user) {
