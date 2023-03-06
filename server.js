@@ -82,7 +82,8 @@ app.post("/api/makePost", async (req, res) => {
         status: "error",
       });
     }
-  } catch {
+  } catch (e) {
+    console.log(e);
     res.json({
       status: "error",
     });
