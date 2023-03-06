@@ -51,9 +51,7 @@ app.post("/api/login", async (req, res) => {
   }
 
   if (await bycrypt.compare(req.body.password, user.password)) {
-    res.json({
-      status: "okay",
-    });
+    res.json(user);
   } else {
     res.json({
       status: "error",
