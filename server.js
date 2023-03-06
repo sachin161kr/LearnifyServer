@@ -59,6 +59,11 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
+app.get("/api/getAllPosts", async (req, res) => {
+  const allPosts = await posts.find();
+  res.send(allPosts);
+});
+
 app.post("/api/makePost", async (req, res) => {
   console.log(req.body);
 
