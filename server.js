@@ -107,7 +107,7 @@ app.post("/api/register", async (req, res) => {
     const hashPass = await bycrypt.hash(req.body.password, 10);
 
     const user = await accounts.create({
-      name: req.body.name,
+      username: req.body.username,
       email: req.body.email,
       password: hashPass,
     });
