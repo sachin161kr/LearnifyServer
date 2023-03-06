@@ -9,6 +9,8 @@ const mongoose = require("mongoose");
 
 const accounts = require("./models/accounts");
 
+const posts = require("./models/posts");
+
 const cors = require("cors");
 
 app.use(express.json());
@@ -53,6 +55,36 @@ app.post("/api/login", async (req, res) => {
       status: "okay",
     });
   } else {
+    res.json({
+      status: "error",
+    });
+  }
+});
+
+app.post("/api/makePost", async (req, res) => {
+  console.log(req.body);
+
+  try {
+    const post = await posts.create({
+      username: req.body.username,
+      email: req.body.email,
+      title: req.body.title,
+      body: req.body.body,
+      tag: req.body.tag,
+    });
+
+    console.log(post);
+
+    if (post) {
+      res.json({
+        status: "okay",
+      });
+    } else {
+      res.json({
+        status: "error",
+      });
+    }
+  } catch {
     res.json({
       status: "error",
     });
