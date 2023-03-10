@@ -59,6 +59,25 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
+app.post("/api/deletePost", async (req, res) => {
+  try {
+    const deleted = await posts.deleteOne({
+      username: req.body.username,
+      title: req.body.title,
+    });
+
+    if (deleted) {
+      res.send({
+        status: "okay",
+      });
+    }
+  } catch (error) {
+    res.send({
+      status: "error",
+    });
+  }
+});
+
 app.get("/api/getAllPosts", async (req, res) => {
   const allPosts = await posts.find();
   res.send(allPosts);
