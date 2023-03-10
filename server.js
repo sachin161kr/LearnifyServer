@@ -78,6 +78,42 @@ app.post("/api/deletePost", async (req, res) => {
   }
 });
 
+app.post("/api/editPost", async (req, res) => {
+  console.log(req.body);
+
+  try {
+    const editedPost = await posts.updateOne(
+      {
+        title: req.body.title,
+      },
+
+      {
+        $set: {
+          title: req.body.newTitle,
+          body: req.body.newBody,
+        },
+      }
+    );
+
+    console.log(editedPost);
+
+    if (editedPost) {
+      res.json({
+        status: "okay",
+      });
+    } else {
+      res.json({
+        status: "error",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({
+      status: "error",
+    });
+  }
+});
+
 app.get("/api/getAllPosts", async (req, res) => {
   const allPosts = await posts.find();
   res.send(allPosts);
