@@ -34,6 +34,18 @@ app.get("/", (req, res) => {
   res.send("Hello world");
 });
 
+app.post("/api/searchItem", async (req, res) => {
+  const allPosts = await posts.find({
+    $or: [
+      { title: req.body.keyword },
+      { body: req.body.keyword },
+      { username: req.body.keyword },
+      { tag: req.body.keyword },
+    ],
+  });
+  res.send(allPosts);
+});
+
 app.post("/api/login", async (req, res) => {
   // bycrypt.hashSync(req.body.password, 3, (err, hash) => {
   //   mainhash = hash;
